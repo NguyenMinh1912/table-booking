@@ -33,6 +33,5 @@ public class InitDataConfig implements CommandLineRunner {
 
         userRepository.save(user);
         userRepository.save(admin);
-
     }
 }
