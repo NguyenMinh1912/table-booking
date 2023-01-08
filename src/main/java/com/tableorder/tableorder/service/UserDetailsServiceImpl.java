@@ -2,6 +2,7 @@ package com.tableorder.tableorder.service;
 
 import com.tableorder.tableorder.mapper.UserMapper;
 import com.tableorder.tableorder.model.UserModel;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@Qualifier("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserService userService;
     private final UserMapper userMapper;

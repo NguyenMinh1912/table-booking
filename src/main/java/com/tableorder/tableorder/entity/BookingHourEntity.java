@@ -19,6 +19,6 @@ public class BookingHourEntity {
 
     private String name;
     @Column(unique = true, columnDefinition = "TIME")
-    private LocalTime localTime;
+    private LocalTime bookingTime;
 
 }

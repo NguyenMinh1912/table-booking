@@ -1,6 +1,7 @@
 package com.tableorder.tableorder.mapper;
 
 import com.tableorder.tableorder.entity.UserEntity;
+import com.tableorder.tableorder.model.AppUserDetails;
 import com.tableorder.tableorder.model.UserModel;
 import org.mapstruct.Mapper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +20,10 @@ public interface UserMapper {
     default UserDetails modelToUserDetails(UserModel userModel){
         List<SimpleGrantedAuthority> roles = userModel.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.name()))
                 .collect(Collectors.toList());
-        return new User(userModel.getUsername(), userModel.getPassword(), roles);
+        AppUserDetails appUserDetails = new AppUserDetails(userModel.getUsername(), userModel.getPassword(), roles);
+        appUserDetails.setName(userModel.getName());
+        appUserDetails.setEmail(userModel.getEmail());
+        return appUserDetails;
     }
 
 }

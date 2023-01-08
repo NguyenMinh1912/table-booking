@@ -1,55 +1,131 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="http://localhost:35729/livereload.js"></script>
+
+  <link th:href="@{/js/vanilla-calendar.min.css}" rel="stylesheet">
 </head>
 <body>
 
-<!-- Main Navigation -->
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <a class="navbar-brand" th:href="@{/}">Business Name</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
-          aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<header>
+  <nav class="nav_header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-8 row">
+            <div class="nav_logo col-2">
+              <a th:href="@{/}">
+                <img th:src="@{/images/logo.webp}" alt="">
+              </a>
+            </div>
+            <div class="nav_list col-10">
+              <ul class="d-flex">
+                <li>Restaurant</li>
+                <li>About us</li>
+                <li>Shop</li>
+                <li>Our story</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-4 user_info">
 
-  <div class="collapse navbar-collapse" id="navbar">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" th:href="@{/}">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/contact}">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/about}">About Us</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+            <div sec:authorize="isAuthenticated()">
+              <form th:action="@{/logout}" method="post">
+                  <button type="submit" class="btn-icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
+              </form>
+            </div>
 
+            <div sec:authorize="!isAuthenticated()">
+              <a class="register_btn" th:href="@{/login}">
+                <i class="fa-regular fa-user"></i>
+              </a>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+  </nav>
+</header>
 <!-- Content Section -->
-<section layout:fragment="content">
-  <p>This is filled by the content template.</p>
-</section>
+<div layout:fragment="content" class="main_content">
+
+</div>
 
 <!-- Footer -->
-<footer class="container py-5">
-  <div class="row">
-    <div class="col-md-12">
-      <p class="text-muted">&copy; 2022 Business Name. All rights reserved.</p>
+<footer class="footer py-5">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-3">
+        <ul class="policies list_style-none">
+          <li class="f-title">ALAJIMO</li>
+          <li>Contacts</li>
+          <li>Press area</li>
+          <li>Organize an event</li>
+          <li>Careers</li>
+          <li>Privacy policy</li>
+          <li>Cookie policy</li>
+          <li>Sales terms and conditions</li>
+          <li>Alajmo+ Terms</li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <div class="address">
+          Alajmo S.p.A. - Copyright 2021 - All rights reserved
+          Tax Code and VAT Number 04384890283
+        </div>
+        <div class="contacts">
+          <ul class="d-flex list_style-none">
+            <li>
+              <i class="fab fa-facebook-f"></i>
+            </li>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+            </li>
+            <li>
+              <i class="fa-brands fa-twitter"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="f-title">
+          NEWSLETTER
+        </div>
+        <button class="subcribe-btn">
+          SUBCRIBE
+        </button>
+      </div>
     </div>
-  </div>
+    </div>
+
 </footer>
 
 <!-- Optional Section -->
 <th:block layout:fragment="optional" />
 
 </body>
+
+<script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/vanilla-calendar.min.js}"></script>
+<script defer="defer" th:src="@{/js/booking.js}"></script>
+
 </html>

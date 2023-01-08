@@ -1,15 +1,50 @@
-<!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+    <title>Welcome to Our Site</title>
 </head>
 <body>
-<h1>Form</h1>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
-    <p>username: <input type="text" th:field="*{username}" /></p>
-    <p>password: <input type="text" th:field="*{password}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
+
+<div layout:fragment="content">
+    <section class="login_form">
+        <div class="login_form_wrapper">
+            <h1 class="text-center access_text">
+                REGISTER
+            </h1>
+
+            <form th:action="@{/register}" method="post">
+                <div>
+                    <input class="app_input" type="text" name="name" placeholder="name"/>
+                </div>
+                <div>
+                    <input class="app_input" type="text" name="username" placeholder="username"/>
+                </div>
+                <div>
+                    <input class="app_input" type="password" name="password" placeholder="password"/>
+                </div>
+                <div>
+                    <input class="app_input" type="text" name="email" placeholder="E-mail"/>
+                </div>
+                <div>
+                    <button type="submit" class="btn-outline" >
+                        Create new account
+                    </button>
+                </div>
+            </form>
+            <div class="mt-3 text-center">
+                <a class="primary-color" th:href="@{/login}">
+                    Already have account? Login
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+</div>
+
 </body>
 </html>
